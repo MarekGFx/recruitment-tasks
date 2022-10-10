@@ -1,0 +1,5 @@
+
+Klasy abstrakcyjnej używamy gdy chcemy uniemożliwić w programie tworzenie obiektów klasy bazowej, które rozszerzają inne klasy ze względu na jej zbyt duży poziom abstrakcji.Klasy abstrakcyjnej stosujemy w celu dzielenia kodu w ramach wspólnej koncepcji klas i obiekty klas dziedziczących po klasie abstrakcyjnej będą miały wiele wspólnych implementacji metod. Klasy abstrakcyjnej możemy używać gdy problem możemy rozwiązać jednokrotnym dziedziczeniem klasy abstrakcyjnej.
+Interfejsy używamy w celu dzielenia kodu między różnymi niepowiązanymi klasami. Interfejs stosujemy w celu rozwiązania problemu wielodziedziczenia, klasy mogą implementować wiele interfejsów.
+Interfejsy stosujemy gdy chcemy określić zachowanie metod, ale nie chcemy wprowadzać ich implementacji na danym etapie.
+Gdy z jakiegoś powodu nie chcemy aby któraś z klas w ramach wspólnej koncepcji już dziedziczących po klasie nadrzędnej,  nie posiadała jakiejś metody, użyjemy w pozostałych klasach interfejs.

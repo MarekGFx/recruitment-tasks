@@ -1,0 +1,8 @@
+Tablica od listy liniowej różni się  sposobem inicjalizacji, rozmiar tablicy musi być ustalony podczas deklaracji, lista liniowa powiększa się lub zmniejsza rozmiar dynamicznie. Tablica może przechowywać typy proste jak i obiektowe, lista liniowa tylko typy obiektowe.
+Największe różnice tablicy w stosunku do listy liniowej związane są ze strukturą i przechowywaniem danych. Dane w tablicy przechowywane są pod indeksami rosnąco, w pamięci bezpośrednio następujących po sobie komórkach. W liście liniowej dane przechowywane są jako zbiór elementów, w którym każdy element wskazuje na następny, zapisywane są w losowych obszarach pamięci.
+W tablicy mamy szybki dostęp do elementu za pomocą "random access". W liście liniowej aby uzyskać dostęp do danego elementu trzeba przejść przez wszystkie poprzedzające elementy. 
+W tablicy wstawianie i usuwanie elementów wymaga przesunięcia pozostałych elementów w kolejnych indeksach(jeśli jest miejsce w tablicy).W liście liniowej przesuwanie elementów nie ma miejsca, dodawanie elementu odbywa się przez zmianę referencji poprzedzającego elementu na wstawiany, wstawiany element otrzymuje referencję do elementu następnego.
+Tablica zużywa mniej pamięci ze względu na dane przechowywane w indeksie tablicy. W liście liniowej zużycie pamięci jest większe ze względu na dodatkowe referencje do następnego i poprzedzającego elementu.
+
+
+

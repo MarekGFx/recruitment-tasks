@@ -1,0 +1,5 @@
+uśredniona złożoność obliczeniowa metody logarytmiczna O(log n), 
+pamięciowa stała O(1)- zmienne w metodzie utwożone są tylko raz bez względu na rozmiar danych.
+
+
+

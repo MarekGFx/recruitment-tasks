@@ -49,11 +49,11 @@ public class KanyeWestQuoteParser {
         try {
             String newKanyeWestQuote = parseNewKanyeWestPost(getNewKanyeWestPost());
             String codeQuote = getQuoteCode(newKanyeWestQuote);
-            if (searchingForNewQuoteCount == 50){
-                System.out.println("Nie udało się znaleśc nowego cytatu. " +
+            if (searchingForNewQuoteCount == 60){
+                System.out.println("Szukanie nowego cytatu trwało zbyt długo. " +
                         "Możesz spróbować ponownie lub zakończyć program.");
             }
-            else if (quotes.size() == QUOTES_NUMBER) {
+            else if (QUOTES_NUMBER > 0 && quotes.size() == QUOTES_NUMBER) {
                 System.out.println("Niestety to już koniec mądrości Kanye Westa - Koniec programu!!!");
                 setOPTION("EXIT");
             } else if (!quotes.contains(codeQuote)) {
@@ -65,7 +65,7 @@ public class KanyeWestQuoteParser {
                 searchingForNewQuoteCount = 0;
             }
         }catch (NullPointerException e){
-            System.out.println("Nie udało się pobrać nowego cytatu. Błąd połączenia z serwerem!\n" +
+            System.out.println("Nie udało się pobrać nowego cytatu.\n" +
                     "Zamykanie programu!");
             setOPTION("EXIT");
         }
@@ -86,12 +86,8 @@ public class KanyeWestQuoteParser {
             JSONArray arrayJson = new JSONArray(json);
             return arrayJson.length();
         } catch (IOException e) {
-            System.out.println("Błąd odczytu z serwera! Nie ma połączenia lub brak dostępu " +
-                    "do pliku! Sprawdź połączenie i spróbuj ponownie!\n" +
-                    "Zamykanie programu");
-            setOPTION("EXIT");
+            return 0;
         }
-        return 0;
     }
 
     public static void getQuote(){

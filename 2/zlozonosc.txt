@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 uśredniona złożoność obliczeniowa metody logarytmiczna O(log n), 
 pamięciowa stała O(1)- zmienne w metodzie utwożone są tylko raz bez względu na rozmiar danych.
 
 
 
+=======
+uśredniona złożoność obliczeniowa metody logarytmiczna O(log n), 
+pamięciowa stała O(1)- zmienne w metodzie utwożone są tylko raz bez względu na rozmiar danych.
+
+
+
+>>>>>>> e125358b8fb976fa64c9987906eb089511d4134d

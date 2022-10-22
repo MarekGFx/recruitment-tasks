@@ -2,9 +2,6 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.IOException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
@@ -17,58 +14,33 @@ public class KanyeWestQuoteParser {
     private static final int QUOTES_NUMBER = getJsonFileSize();
     private static int searchingForNewQuoteCount = 0;
 
-    private static String getNewKanyeWestPost(){
-        try {
-            String url = "https://api.kanye.rest";
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
-            return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                    .thenApply(HttpResponse::body)
-                    .join();
-        } catch (Exception e){
-            System.out.println("Błąd połączenia z serwerem!");
-        }
-        return null;
-    }
-
     private static String parseNewKanyeWestPost(String post) {
         JSONObject jsonPost = new JSONObject(post);
         return jsonPost.getString("quote");
     }
 
-    private static void formatQuoteString(String quote) {
-        System.out.println();
-        System.out.println('"' + quote + '"');
-        String name = "- Kanye West";
-        System.out.printf("%" + (quote.length()) + "s",name);
-        System.out.println();
-    }
-
-    private static void checkIsNewKanyeWestQuote() {
+    private static String checkIsNewKanyeWestQuote() {
 
         try {
-            String newKanyeWestQuote = parseNewKanyeWestPost(getNewKanyeWestPost());
+            String newKanyeWestQuote = parseNewKanyeWestPost(KanyeWestGetPost.getPost());
             String codeQuote = getQuoteCode(newKanyeWestQuote);
-            if (searchingForNewQuoteCount == 60){
-                System.out.println("Szukanie nowego cytatu trwało zbyt długo. " +
-                        "Możesz spróbować ponownie lub zakończyć program.");
-            }
-            else if (QUOTES_NUMBER > 0 && quotes.size() == QUOTES_NUMBER) {
-                System.out.println("Niestety to już koniec mądrości Kanye Westa - Koniec programu!!!");
-                setOPTION("EXIT");
+            if (searchingForNewQuoteCount == 50){
+                searchingForNewQuoteCount = 0;
+                return "next";
+            } else if (QUOTES_NUMBER != 0 && quotes.size() == QUOTES_NUMBER) {
+                return "end";
             } else if (!quotes.contains(codeQuote)) {
                 quotes.add(codeQuote);
-                formatQuoteString(newKanyeWestQuote);
-            } else {
-                searchingForNewQuoteCount++;
-                checkIsNewKanyeWestQuote();
                 searchingForNewQuoteCount = 0;
+                return '"' + newKanyeWestQuote + '"';
             }
         }catch (NullPointerException e){
-            System.out.println("Nie udało się pobrać nowego cytatu.\n" +
+            System.out.println("Nie udało się pobrać nowego cytatu. Błąd połączenia z serwerem!\n" +
                     "Zamykanie programu!");
-            setOPTION("EXIT");
+            return "EXIT";
         }
+        searchingForNewQuoteCount++;
+        return checkIsNewKanyeWestQuote();
     }
 
     private static String getQuoteCode(String newKanyeWestQuote) {
@@ -90,8 +62,10 @@ public class KanyeWestQuoteParser {
         }
     }
 
-    public static void getQuote(){
-        checkIsNewKanyeWestQuote();
+    public static int getNumberOfQuotes(){return getJsonFileSize();}
+
+    public static String getQuote(){
+     return checkIsNewKanyeWestQuote();
     }
 
     public static String getOPTION(){

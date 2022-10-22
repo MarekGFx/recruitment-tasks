@@ -11,12 +11,30 @@ public class KanyeWestQuoteApp {
             printOption();
             KanyeWestQuoteParser.setOPTION(scanner.nextLine().toUpperCase());
             switch (KanyeWestQuoteParser.getOPTION()) {
-                case "NEXT" -> KanyeWestQuoteParser.getQuote();
+                case "NEXT" -> printQuote();
                 case "EXIT" -> System.out.println("Koniec programu!");
                 default -> System.out.println("Nie ma takiej opcji!");
             }
         }
         scanner.close();
+    }
+
+    private static void printQuote() {
+        String quote = KanyeWestQuoteParser.getQuote();
+        if (quote.equals("next")){
+            System.out.println("Nie udało się znaleśc nowego cytatu. " +
+                    "Możesz spróbować ponownie lub zakończyć program.");
+        } else if (quote.equals("end")){
+            System.out.println("Niestety to już koniec mądrości Kanye Westa - Koniec programu!!!");
+            KanyeWestQuoteParser.setOPTION("EXIT");
+        } else if (quote.equals("EXIT")){
+            KanyeWestQuoteParser.setOPTION("EXIT");
+        } else {
+            System.out.println();
+            System.out.println(quote);
+            System.out.printf("%" + quote.length() + "s", "-Kanye West");
+            System.out.println();
+        }
     }
 
     private static void printOption(){
